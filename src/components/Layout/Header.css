@@ -1,0 +1,41 @@
+#header {
+  padding: 3rem 0;
+  background: rgb(245, 244, 244);
+  border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+#header > .container {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.header__logo {
+  color: #f44e01;
+}
+
+.header__nav__list {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav__list--link {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+
+  padding: 1rem;
+
+  transition: 150ms ease;
+}
+
+.nav__list--link:hover {
+  color: rgb(0, 119, 255);
+  background: #eee;
+}
+
+.nav__list--link.active {
+  background-color: rgb(54, 148, 255);
+  color: white;
+}

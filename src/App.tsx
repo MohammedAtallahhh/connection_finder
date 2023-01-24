@@ -1,10 +1,29 @@
+// Libraries
+import { Route, Routes } from "react-router-dom";
+
+// Components
+import {
+  AddPeople,
+  AddRelationships,
+  ConnectionFinder,
+  Header,
+  Home,
+} from "./components";
+
+// Styles
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello World!</h1>
-    </div>
+    <>
+      <Header />
+      <Routes>
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<AddPeople />} />
+        <Route path="/add-relationships" element={<AddRelationships />} />
+        <Route path="/find-connection" element={<ConnectionFinder />} />
+      </Routes>
+    </>
   );
 }
 
