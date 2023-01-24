@@ -1,0 +1,26 @@
+.btn {
+  border: 1px solid #e64a03;
+  outline: none;
+
+  font-size: 1.8rem;
+  font-weight: 700;
+
+  padding: 0.75em 2.5em;
+
+  background-color: #ff5100;
+  color: white;
+
+  cursor: pointer;
+
+  transition: 200ms ease;
+}
+
+.btn:hover {
+  background-color: #e2500d;
+}
+
+.btn:focus,
+.btn:active {
+  background-color: rgb(211, 69, 3);
+  box-shadow: 2px 4px 20px rgba(250, 114, 52, 0.25);
+}

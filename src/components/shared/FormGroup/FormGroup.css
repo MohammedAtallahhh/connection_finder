@@ -1,0 +1,27 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 2rem;
+}
+
+.form__label {
+  font-size: 1.8rem;
+  text-align: left;
+  text-transform: capitalize;
+
+  margin-bottom: 1rem;
+}
+
+.form__input {
+  font-size: inherit;
+  padding: 1.5rem;
+
+  border: 1px solid #aaa;
+}
+
+.form__input:focus {
+  outline: none;
+  border: 1px solid #555;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+}

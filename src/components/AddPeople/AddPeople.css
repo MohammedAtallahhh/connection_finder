@@ -8,5 +8,20 @@
 
 .add-people__content h2 {
   font-size: 3.5rem;
+  line-height: 4.5rem;
+  margin-bottom: 7rem;
+
+  max-width: 30ch;
+  margin-inline: auto;
+}
+
+.add-people__form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.add-people__form .form__title {
+  font-size: 2.4rem;
   margin-bottom: 2rem;
 }
