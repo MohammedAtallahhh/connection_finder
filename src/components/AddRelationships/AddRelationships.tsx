@@ -3,54 +3,44 @@ import React, { FormEvent } from "react";
 // Styles
 import "./AddRelationships.css";
 import toast from "react-hot-toast";
-import {
-  addRelationship,
-  isPersonExist,
-  isRelationshipExist,
-} from "../../firebase/db";
+import { addRelationship, isRelationshipExist } from "../../firebase/db";
 
 import { RelationForm } from "../shared";
 
 interface IFormData {
-  firstPerson: string;
-  secondPerson: string;
+  first: string;
+  second: string;
   relationship: string;
 }
 
 const AddRelationships = () => {
   const handleSubmit = async (
     e: FormEvent<HTMLFormElement>,
-    formData: IFormData
+    formData: IFormData,
+    setFormData: React.Dispatch<React.SetStateAction<IFormData>>,
+    validate: () => {}
   ) => {
     e.preventDefault();
+    // Validate form fields
+    validate();
 
-    const { firstPerson, secondPerson, relationship } = formData;
+    const { first, second, relationship } = formData;
 
-    const data = {
-      first: firstPerson.toLowerCase(),
-      second: secondPerson.toLowerCase(),
-      type: relationship,
-    };
-
-    if (!firstPerson || !secondPerson) {
-      return toast.error("Names must be provided.");
-    }
-
-    if (firstPerson.toLowerCase() === secondPerson.toLowerCase()) {
-      return toast.error("Names must be different.");
-    }
-
-    if (
-      !(await isPersonExist(firstPerson)) ||
-      !(await isPersonExist(secondPerson))
-    ) {
-      return toast.error("Names not exist.");
-    }
-
-    if (await isRelationshipExist(data)) {
+    if (await isRelationshipExist({ first, second, type: relationship })) {
       return toast.error("Relationship aleardy exist.");
     }
-    addRelationship(data);
+
+    // Add data to the database
+    addRelationship({ first, second, type: relationship });
+
+    toast.success("Relationship added successfully!");
+
+    // Reset form
+    setFormData({
+      first: "",
+      second: "",
+      relationship: "friend",
+    });
   };
 
   return (

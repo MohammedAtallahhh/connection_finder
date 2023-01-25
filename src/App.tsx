@@ -8,12 +8,10 @@ import {
   AddRelationships,
   ConnectionFinder,
   Header,
-  Home,
 } from "./components";
 
 // Styles
 import "./App.css";
-import usePeople from "./hooks/usePeople";
 
 function App() {
   return (
