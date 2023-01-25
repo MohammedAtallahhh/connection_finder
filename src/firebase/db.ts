@@ -51,6 +51,7 @@ export const deletePerson = async (id: string) => {
 
 export const isRelationshipExist = async (data: IRelationship) => {
   const relationshipsRef = collection(db, "relationships");
+
   const q = query(
     relationshipsRef,
     where("first", "==", data.first),

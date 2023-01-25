@@ -1,14 +1,10 @@
-import React, { ChangeEvent, FC, FormEvent } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 
 // Components
 import { Button, FormGroup } from "../";
 
 // Styles
 import "./RelationForm.css";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { isPersonExist } from "../../../firebase/db";
-
 interface IFormData {
   first: string;
   second: string;
@@ -18,10 +14,8 @@ interface IFormData {
 interface IRelationForm {
   title: string;
   onSubmit: (
-    e: FormEvent<HTMLFormElement>,
     formData: IFormData,
-    setFormData: React.Dispatch<React.SetStateAction<IFormData>>,
-    validate: () => {}
+    setFormData: React.Dispatch<React.SetStateAction<IFormData>>
   ) => void;
 }
 
@@ -32,29 +26,13 @@ const RelationForm: FC<IRelationForm> = ({ title, onSubmit }) => {
     relationship: "friend",
   });
 
-  console.log({ formData });
-
-  const validate = async () => {
-    if (!formData.first || !formData.second) {
-      return toast.error("Names must be provided.");
-    }
-
-    if (formData.first === formData.second) {
-      return toast.error("Names must be different.");
-    }
-
-    if (
-      !(await isPersonExist(formData.first)) ||
-      !(await isPersonExist(formData.second))
-    ) {
-      return toast.error("Names not exist.");
-    }
-  };
-
   return (
     <form
       className="relation__form"
-      onSubmit={(e) => onSubmit(e, formData, setFormData, validate)}
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit(formData, setFormData);
+      }}
     >
       <FormGroup
         label="first person"
@@ -86,9 +64,7 @@ const RelationForm: FC<IRelationForm> = ({ title, onSubmit }) => {
             setFormData((data) => ({ ...data, relationship: e.target.value }))
           }
         >
-          <option value="friend" defaultValue="friend">
-            Friend
-          </option>
+          <option value="friend">Friend</option>
         </select>
       </div>
 

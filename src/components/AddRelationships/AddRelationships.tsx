@@ -1,9 +1,13 @@
-import React, { FormEvent } from "react";
+import React from "react";
 
 // Styles
 import "./AddRelationships.css";
 import toast from "react-hot-toast";
-import { addRelationship, isRelationshipExist } from "../../firebase/db";
+import {
+  addRelationship,
+  isPersonExist,
+  isRelationshipExist,
+} from "../../firebase/db";
 
 import { RelationForm } from "../shared";
 
@@ -15,16 +19,23 @@ interface IFormData {
 
 const AddRelationships = () => {
   const handleSubmit = async (
-    e: FormEvent<HTMLFormElement>,
     formData: IFormData,
-    setFormData: React.Dispatch<React.SetStateAction<IFormData>>,
-    validate: () => {}
+    setFormData: React.Dispatch<React.SetStateAction<IFormData>>
   ) => {
-    e.preventDefault();
     // Validate form fields
-    validate();
-
     const { first, second, relationship } = formData;
+
+    if (!first || !second) {
+      return toast.error("Names must be provided.");
+    }
+
+    if (first === second) {
+      return toast.error("Names must be different.");
+    }
+
+    if (!(await isPersonExist(first)) || !(await isPersonExist(second))) {
+      return toast.error("Names not exist.");
+    }
 
     if (await isRelationshipExist({ first, second, type: relationship })) {
       return toast.error("Relationship aleardy exist.");

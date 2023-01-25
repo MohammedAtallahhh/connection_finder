@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../firebase";
-import { async } from "@firebase/util";
 
 interface IPerson {
   id: string;
