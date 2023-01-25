@@ -1,5 +1,6 @@
 // Libraries
 import { Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 // Components
 import {
@@ -18,6 +19,7 @@ function App() {
   return (
     <>
       <Header />
+      <Toaster />
       <Routes>
         {/* <Route path="/" element={<Home />} /> */}
         <Route path="/" element={<AddPeople />} />

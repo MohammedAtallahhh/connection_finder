@@ -13,11 +13,20 @@
 
 .add-people__form {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0 auto 8rem;
   text-align: left;
 }
 
 .add-people__form .form__title {
   font-size: 2.4rem;
+  margin-bottom: 2rem;
+}
+
+.people-list {
+  text-align: left;
+}
+
+.people-list h3 {
+  font-size: 3rem;
   margin-bottom: 2rem;
 }

@@ -13,8 +13,14 @@
   margin-bottom: 1rem;
 }
 
-.relation__form #relationship > div {
-  padding: 0.5rem 0;
+.relation__form select {
+  display: block;
+  font-size: 1.6rem;
+
+  width: 100%;
+  padding: 1.5rem;
+
+  border: 1px solid #aaa;
 }
 
 .relation__form--submit {
