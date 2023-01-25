@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { collection, getDocs, query } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  QuerySnapshot,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 import { IRelationship } from "../types";
@@ -23,6 +29,21 @@ const useRelationships = () => {
 
   useEffect(() => {
     fetchRelationships();
+
+    const collectionRef = collection(db, "relationships");
+
+    const unsubsribe = onSnapshot(collectionRef, (snapshot: QuerySnapshot) => {
+      const updatedCollection = snapshot.docs.map(
+        (doc) =>
+          ({
+            id: doc.id,
+            ...doc.data(),
+          } as IRelationship)
+      );
+      setRelationships(updatedCollection);
+    });
+
+    return () => unsubsribe();
   }, []);
 
   return relationships;

@@ -3,6 +3,7 @@ import {
   collection,
   where,
   limit,
+  getDoc,
   getDocs,
   setDoc,
   doc,
@@ -15,7 +16,11 @@ import { IPerson, IRelationship } from "../types";
 
 export const isPersonExist = async (name: string) => {
   const peopleRef = collection(db, "people");
-  const q = query(peopleRef, where("name", "==", name.toLowerCase()), limit(1));
+  const q = query(
+    peopleRef,
+    where("name", "==", name.toLowerCase().trim()),
+    limit(1)
+  );
 
   const snapshot = await getDocs(q);
 
@@ -32,10 +37,10 @@ export const addPerson = async ({ id, name }: IPerson) => {
   await setDoc(docRef, { name: name.toLowerCase() });
 };
 
-export const deletePerson = async (id: string) => {
+export const deleteById = async (id: string, collection: string) => {
   if (!id) return;
 
-  const docRef = doc(db, "people", id);
+  const docRef = doc(db, collection, id);
 
   await deleteDoc(docRef);
 };
@@ -45,8 +50,8 @@ export const isRelationshipExist = async (data: Omit<IRelationship, "id">) => {
 
   const q = query(
     relationshipsRef,
-    where("first", "==", data.first),
-    where("second", "==", data.second),
+    where("first", "==", data.first.trim()),
+    where("second", "==", data.second.trim()),
     where("type", "==", data.type),
     limit(1)
   );

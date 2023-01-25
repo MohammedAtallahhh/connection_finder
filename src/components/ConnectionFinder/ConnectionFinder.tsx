@@ -46,6 +46,8 @@ const ConnectionFinder = () => {
 
     const res: string[] | undefined = graph.bidirectionalSearch(first, second);
 
+    console.log({ res });
+
     setResult(res ?? []);
 
     // Reset form

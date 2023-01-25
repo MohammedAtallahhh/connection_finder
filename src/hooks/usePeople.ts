@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 
-import { query, collection, getDocs } from "firebase/firestore";
+import {
+  query,
+  collection,
+  getDocs,
+  onSnapshot,
+  QuerySnapshot,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 import { IPerson } from "../types";
@@ -23,6 +29,21 @@ const usePeople = () => {
 
   useEffect(() => {
     fetchPeople();
+
+    const collectionRef = collection(db, "people");
+
+    const unsubsribe = onSnapshot(collectionRef, (snapshot: QuerySnapshot) => {
+      const updatedCollection = snapshot.docs.map(
+        (doc) =>
+          ({
+            id: doc.id,
+            ...doc.data(),
+          } as IPerson)
+      );
+      setPeople(updatedCollection);
+    });
+
+    return () => unsubsribe();
   }, []);
 
   return people;
