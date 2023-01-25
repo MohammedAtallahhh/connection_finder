@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-import { collection, getDocs, query } from "firebase/firestore";
+import { query, collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
-interface IPerson {
-  id: string;
-  //   name: string;
-}
+import { IPerson } from "../types";
 
 const usePeople = () => {
   const [people, setPeople] = useState<IPerson[]>([]);
@@ -18,11 +15,12 @@ const usePeople = () => {
 
     const result: IPerson[] = [];
     docsSnap.forEach((doc) => {
-      result.push({ id: doc.id, ...doc.data() });
+      result.push({ id: doc.id, ...doc.data() } as IPerson);
     });
 
     setPeople(result);
   };
+
   useEffect(() => {
     fetchPeople();
   }, []);

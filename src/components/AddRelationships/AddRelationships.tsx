@@ -1,5 +1,3 @@
-import React from "react";
-
 // Styles
 import "./AddRelationships.css";
 import toast from "react-hot-toast";
@@ -10,6 +8,8 @@ import {
 } from "../../firebase/db";
 
 import { RelationForm } from "../shared";
+import useRelationships from "../../hooks/useRelationships";
+import RelationshipsTable from "./RelationshipsTable";
 
 interface IFormData {
   first: string;
@@ -18,6 +18,8 @@ interface IFormData {
 }
 
 const AddRelationships = () => {
+  const relationships = useRelationships();
+
   const handleSubmit = async (
     formData: IFormData,
     setFormData: React.Dispatch<React.SetStateAction<IFormData>>
@@ -59,6 +61,10 @@ const AddRelationships = () => {
       <div className="container">
         <h2 className="add-relationships__title">Add Relationships</h2>
         <RelationForm title="Add Relationship" onSubmit={handleSubmit} />
+
+        {relationships.length > 0 && (
+          <RelationshipsTable relationships={relationships} />
+        )}
       </div>
     </section>
   );

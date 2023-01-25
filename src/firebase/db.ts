@@ -11,16 +11,7 @@ import {
 import { db } from "./";
 import { uuidv4 } from "@firebase/util";
 
-export interface IPerson {
-  id: string;
-  name: string;
-}
-
-export interface IRelationship {
-  first: string;
-  second: string;
-  type: string;
-}
+import { IPerson, IRelationship } from "../types";
 
 export const isPersonExist = async (name: string) => {
   const peopleRef = collection(db, "people");
@@ -49,7 +40,7 @@ export const deletePerson = async (id: string) => {
   await deleteDoc(docRef);
 };
 
-export const isRelationshipExist = async (data: IRelationship) => {
+export const isRelationshipExist = async (data: Omit<IRelationship, "id">) => {
   const relationshipsRef = collection(db, "relationships");
 
   const q = query(
@@ -69,7 +60,7 @@ export const isRelationshipExist = async (data: IRelationship) => {
   }
 };
 
-export const addRelationship = async (data: IRelationship) => {
+export const addRelationship = async (data: Omit<IRelationship, "id">) => {
   const docRef = doc(db, "relationships", uuidv4());
 
   await setDoc(docRef, data);

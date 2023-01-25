@@ -1,15 +1,20 @@
-import React, { ChangeEvent, FormEvent } from "react";
-import { uuidv4 } from "@firebase/util";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+
+import { toast } from "react-hot-toast";
 
 import { Button, FormGroup } from "../shared";
+import PeopleTable from "./PeopleTable";
+
+import { addPerson, isPersonExist } from "../../firebase/db";
+import usePeople from "../../hooks/usePeople";
+import { uuidv4 } from "@firebase/util";
+
 // Styles
 import "./AddPeople.css";
-import { useState } from "react";
-import { toast } from "react-hot-toast";
-import { addPerson, isPersonExist } from "../../firebase/db";
 
 const AddPeople = () => {
   const [name, setName] = useState("");
+  const people = usePeople();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,15 +60,7 @@ const AddPeople = () => {
           <Button className="form__submit">Add</Button>
         </form>
 
-        {/* {people.length > 0 && (
-          <div className="people-list">
-            <h3>People</h3>
-            <Table
-              data={people.map((p, i) => ({ ...p, id: i + 1 }))}
-              onDelete={handleDelete}
-            />
-          </div>
-        )} */}
+        {people.length > 0 && <PeopleTable people={people} />}
       </div>
     </section>
   );
