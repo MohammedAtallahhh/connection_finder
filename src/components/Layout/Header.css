@@ -17,8 +17,9 @@
 
 .header__nav__list {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
+  gap: 3rem 1rem;
 }
 
 .nav__list--link {

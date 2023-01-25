@@ -18,7 +18,7 @@ const Header = () => {
       <div className="container">
         {/* Logo */}
         <Link to="/" className="header__logo">
-          <h2>RaftLabs.</h2>
+          <h3>RaftLabs.</h3>
         </Link>
 
         {/* Navbar */}

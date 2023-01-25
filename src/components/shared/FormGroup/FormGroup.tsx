@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 // Styles
 import "./FormGroup.css";
@@ -7,7 +7,7 @@ interface IFromGroup {
   label: string;
   placeHolder: string;
 }
-const FormGroup = ({ label, placeHolder }: IFromGroup) => {
+const FormGroup: FC<IFromGroup> = ({ label, placeHolder }) => {
   return (
     <div className="form-group">
       <label htmlFor={label} className="form__label">

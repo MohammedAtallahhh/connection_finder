@@ -45,6 +45,20 @@ a {
   color: rgb(54, 148, 255);
 }
 
+button {
+  border: none;
+  cursor: pointer;
+}
+
+section {
+  padding: 8rem 0;
+}
+
+h2 {
+  font-size: 3rem;
+  margin-bottom: 5rem;
+}
+
 /*====================
 =============== Helpers 
 =====================*/

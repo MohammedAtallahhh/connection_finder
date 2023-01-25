@@ -1,10 +1,17 @@
 import React from "react";
+import { RelationForm } from "../shared";
 
 const ConnectionFinder = () => {
   return (
-    <div>
-      <h1>Find Connection</h1>
-    </div>
+    <section className="connection-finder">
+      <div className="container">
+        <h2>Find How people are connected</h2>
+
+        <RelationForm title="Find connection" onSubmit={() => {}} />
+
+        <div className="result"></div>
+      </div>
+    </section>
   );
 };
 
