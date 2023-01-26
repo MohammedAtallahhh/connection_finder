@@ -16,21 +16,21 @@ const RelationshipsTable: FC<IRelationshipsTable> = ({ relationships }) => {
         <ul className="table">
           {/* Header */}
           <li className="table-header">
-            <div className="col col-1">Id</div>
-            <div className="col col-2">First</div>
-            <div className="col col-3">Second</div>
-            <div className="col col-3">Type</div>
-            <div className="col col-3">Action</div>
+            <div className="col col1">Id</div>
+            <div className="col col3">First</div>
+            <div className="col col3">Second</div>
+            <div className="col col1">Type</div>
+            <div className="col col1">Action</div>
           </li>
 
           {/* Body */}
           {relationships.map(({ id, first, second, type }, i) => (
             <li key={id} className="table-row">
-              <div className="col col-1">{i + 1}</div>
-              <div className="col col-2">{first.toUpperCase()}</div>
-              <div className="col col-2">{second.toUpperCase()}</div>
-              <div className="col col-2">{type.toUpperCase()}</div>
-              <div className="col col-3">
+              <div className="col col1">{i + 1}</div>
+              <div className="col col3">{first.toUpperCase()}</div>
+              <div className="col col3">{second.toUpperCase()}</div>
+              <div className="col col1">{type.toUpperCase()}</div>
+              <div className="col col1">
                 <button
                   className="delete"
                   onClick={() => deleteById(id, "relationships")}
