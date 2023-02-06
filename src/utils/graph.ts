@@ -30,6 +30,8 @@ class Graph {
   ) {
     const current = queue.shift();
 
+    console.log({ queue, visited, parent });
+
     this.adjacencyList[current as string]?.forEach((vertex: string) => {
       if (!visited[vertex]) {
         parent[vertex as string] = current as string;

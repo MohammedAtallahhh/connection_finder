@@ -41,7 +41,7 @@ const ConnectionFinder = () => {
     }
 
     relationships.forEach((relationship) =>
-      graph.addEdge(relationship.first, relationship.second)
+      graph.addEdge(relationship.first.trim(), relationship.second.trim())
     );
 
     const res: string[] | undefined = graph.bidirectionalSearch(first, second);
